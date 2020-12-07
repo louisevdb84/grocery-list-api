@@ -21,12 +21,16 @@ const ItemType = new GraphQLObjectType({
         id: { type: GraphQLID  },
         name: { type: GraphQLString }, 
         // pages: { type: GraphQLInt },
-        shop: {
-        type: ShopType,
-        resolve(parent, args) {
-            return Shop.findById(parent.shopID);
+        shop:{
+            type: new GraphQLList(ShopType),
+            resolve(parent,args){                                
+                return Shop.find({ _id: parent.shopID });
+            }
         }
-    }
+       
+       
+            // return Shop.findById(parent.shopID);
+       
     })
 });
 
@@ -109,13 +113,13 @@ const Mutation = new GraphQLObjectType({
             args:{
                 name: { type: new GraphQLNonNull(GraphQLString)},
                 // pages: { type: new GraphQLNonNull(GraphQLInt)},
-                shopID: { type: new GraphQLNonNull(GraphQLID)}
+                shopID: { type: new GraphQLNonNull(GraphQLID)},                
             },
             resolve(parent,args){
                 let item = new Item({
                     name:args.name,
                     // pages:args.pages,
-                    shopID:args.shopID
+                    shopID:args.shopID,                    
                 })
                 return item.save()
             }
