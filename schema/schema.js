@@ -93,7 +93,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-        addShop: {
+        addShop_API: {
             type: ShopType,
             args: {
                 //GraphQLNonNull make these field required
@@ -108,7 +108,7 @@ const Mutation = new GraphQLObjectType({
                 return shop.save();
             }
         },
-        addItem:{
+        addItem_API:{
             type:ItemType,
             args:{
                 name: { type: new GraphQLNonNull(GraphQLString)},
