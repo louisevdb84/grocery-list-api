@@ -4,7 +4,7 @@ const Shop = require('../models/shop');
 
 const { 
     GraphQLObjectType, GraphQLString, 
-    GraphQLID, GraphQLInt,GraphQLSchema, 
+    GraphQLID, GraphQLSchema, 
     GraphQLList,GraphQLNonNull 
 } = graphql;
 
@@ -19,8 +19,7 @@ const ItemType = new GraphQLObjectType({
     //found if not wrapped in a function
     fields: () => ({
         id: { type: GraphQLID  },
-        name: { type: GraphQLString }, 
-        // pages: { type: GraphQLInt },
+        name: { type: GraphQLString },         
         shop:{
             type: new GraphQLList(ShopType),
             resolve(parent,args){                                
@@ -38,8 +37,7 @@ const ShopType = new GraphQLObjectType({
     name: 'Shop',
     fields: () => ({
         id: { type: GraphQLID },
-        name: { type: GraphQLString },
-        // age: { type: GraphQLInt },
+        name: { type: GraphQLString },        
         item:{
             type: new GraphQLList(ItemType),
             resolve(parent,args){
@@ -97,8 +95,7 @@ const Mutation = new GraphQLObjectType({
             type: ShopType,
             args: {
                 //GraphQLNonNull make these field required
-                name: { type: new GraphQLNonNull(GraphQLString) },
-                // age: { type: new GraphQLNonNull(GraphQLInt) }
+                name: { type: new GraphQLNonNull(GraphQLString) },                
             },
             resolve(parent, args) {
                 let shop = new Shop({
@@ -111,17 +108,26 @@ const Mutation = new GraphQLObjectType({
         addItem_API:{
             type:ItemType,
             args:{
-                name: { type: new GraphQLNonNull(GraphQLString)},
-                // pages: { type: new GraphQLNonNull(GraphQLInt)},
-                shopID: { type: new GraphQLNonNull(GraphQLID)},                
+                name: { type: new GraphQLNonNull(GraphQLString)},                
+                shopID: { type: GraphQLList(GraphQLString)},                
             },
-            resolve(parent,args){
+            resolve(parent,args){                
                 let item = new Item({
-                    name:args.name,
-                    // pages:args.pages,
+                    name:args.name,                    
                     shopID:args.shopID,                    
                 })
                 return item.save()
+            }
+        },
+
+        deleteItem:{
+            type:ItemType,
+            args:{
+                _id: { type: new GraphQLNonNull(GraphQLString)},               
+                
+            },
+            resolve(parent,args){                
+               return Item.findByIdAndRemove(args._id);
             }
         }
     }
