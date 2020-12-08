@@ -8,7 +8,10 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 
 mongoose.connection.once('open', () => {
     console.log('conneted to database');
@@ -23,8 +26,7 @@ app.use('/graphql',  graphqlHTTP({
     schema,
     //Directing express-graphql to use graphiql when goto '/graphql' address in the browser
     //which provides an interface to make GraphQl queries
-    graphiql:true,
-    useUnifiedTopology: true
+    graphiql:true
 }));
 
 //app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
