@@ -8,8 +8,8 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const mongoose = require('mongoose');
 
 const mongoDbConnectionString = process.env.groceryListMongoDb;
-// mongoose.connect(mongoDbConnectionString, {
-mongoose.connect("mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
+ mongoose.connect(mongoDbConnectionString, {
+
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
