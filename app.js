@@ -7,8 +7,9 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 
 const mongoose = require('mongoose');
 
-
-mongoose.connect('mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority', {
+const mongoDbConnectionString = process.env.groceryListMongoDb;
+// mongoose.connect(mongoDbConnectionString, {
+mongoose.connect("mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -32,6 +33,6 @@ app.use('/graphql',  graphqlHTTP({
 
 //app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000, () => {
     console.log('Listening on port 4000');
 }); 
