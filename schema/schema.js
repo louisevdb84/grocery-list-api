@@ -120,6 +120,10 @@ const Mutation = new GraphQLObjectType({
             }
         },
 
+        // async updateProduct(root, {_id, input}){
+        //     return await Product.findOneAndUpdate({_id},input,{new: true})
+        // },
+
         deleteItem:{
             type:ItemType,
             args:{
