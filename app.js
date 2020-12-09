@@ -39,6 +39,7 @@ app.use('/graphql',  graphqlHTTP({
   app.listen(port);
   
   console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+  
 
 }
 
