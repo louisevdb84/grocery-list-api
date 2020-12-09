@@ -5,11 +5,13 @@ const app = express();
 const cors = require('cors');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 const expressPlayground = require("graphql-playground-middleware-express").default;
-
 const mongoose = require('mongoose');
 
+
+const startServer = async()=>{
+
 const mongoDbConnectionString = process.env.groceryListMongoDb;
- mongoose.connect("mongodb+srv://louisevdb84:Password_123@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
+await mongoose.connect("mongodb+srv://louisevdb84:Password_123@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -37,3 +39,7 @@ app.use('/graphql',  graphqlHTTP({
   app.listen(port);
   
   console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+
+}
+
+startServer();
