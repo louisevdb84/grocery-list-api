@@ -1,5 +1,5 @@
 {
-  "name": "graphqlserver",
+  "name": "grocerylistapi",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,16 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/utkarshp21/graphql-server-setup.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/utkarshp21/graphql-server-setup/issues"
-  },
-  "homepage": "https://github.com/utkarshp21/graphql-server-setup#readme",
   "dependencies": {
     "apollo-server-express": "^2.19.0",
     "cors": "^2.8.5",
