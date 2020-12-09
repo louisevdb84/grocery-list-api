@@ -9,7 +9,7 @@ const expressPlayground = require("graphql-playground-middleware-express").defau
 const mongoose = require('mongoose');
 
 const mongoDbConnectionString = process.env.groceryListMongoDb;
- mongoose.connect(mongoDbConnectionString, {
+ mongoose.connect("mongodb+srv://louisevdb84:Neelix_007@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
