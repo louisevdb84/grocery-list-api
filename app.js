@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const startServer = async()=>{
 
 const mongoDbConnectionString = process.env.groceryListMongoDb;
-await mongoose.connect("mongodb+srv://louisevdb84:Password_123@cluster0.d6h2c.mongodb.net/shopping_list?retryWrites=true&w=majority", {
+await mongoose.connect(mongoDbConnectionString, {
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
