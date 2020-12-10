@@ -5,7 +5,7 @@ const Shop = require('../models/shop');
 const { 
     GraphQLObjectType, GraphQLString, 
     GraphQLID, GraphQLSchema, 
-    GraphQLList,GraphQLNonNull 
+    GraphQLList,GraphQLNonNull, GraphQLBoolean
 } = graphql;
 
 //Schema defines data on the Graph like object types(book type), relation between 
@@ -19,7 +19,9 @@ const ItemType = new GraphQLObjectType({
     //found if not wrapped in a function
     fields: () => ({
         id: { type: GraphQLID  },
-        name: { type: GraphQLString },         
+        name: { type: GraphQLString },    
+        completed: {type: GraphQLBoolean},
+        ordered: {type: GraphQLBoolean},
         shop:{
             type: new GraphQLList(ShopType),
             resolve(parent,args){                                
@@ -114,7 +116,9 @@ const Mutation = new GraphQLObjectType({
             resolve(parent,args){                
                 let item = new Item({
                     name:args.name,                    
-                    shopID:args.shopID,                    
+                    shopID:args.shopID,     
+                    completed: false,
+                    ordered: false               
                 })
                 return item.save()
             }
@@ -123,6 +127,28 @@ const Mutation = new GraphQLObjectType({
         // async updateProduct(root, {_id, input}){
         //     return await Product.findOneAndUpdate({_id},input,{new: true})
         // },
+
+        updateCompletedItem:{
+            type:ItemType,
+            args:{
+                _id: { type: new GraphQLNonNull(GraphQLString)},               
+                
+            },
+            resolve(parent,args){                
+               return Item.findByIdAndUpdate(args._id, {completed: true});
+            }
+        },
+
+        updateOrderedItem:{
+            type:ItemType,
+            args:{
+                _id: { type: new GraphQLNonNull(GraphQLString)},               
+                
+            },
+            resolve(parent,args){                
+               return Item.findByIdAndUpdate(args._id, {ordered: true});
+            }
+        },
 
         deleteItem:{
             type:ItemType,

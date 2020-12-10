@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-    name: String,
+    name: String,    
+    ordered: Boolean,
+    completed: Boolean,
     shopID: [String],
 });
 
