@@ -10,13 +10,14 @@ const mongoose = require('mongoose');
 
 const startServer = async()=>{
 
-const mongoDbConnectionString = process.env.groceryListMongoDb;
-await mongoose.connect(mongoDbConnectionString, {
+   
+    const mongoDbConnectionString = process.env.groceryListMongoDb;
+    await mongoose.connect(mongoDbConnectionString, {
 
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-})
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    })
 
 mongoose.connection.once('open', () => {
     console.log('conneted to database');
@@ -34,8 +35,7 @@ app.use('/graphql',  graphqlHTTP({
 
   app.get("/playground", expressPlayground({ endpoint: "/graphql" }));
   
-  const port = process.env.PORT || "4000";
-  console.log("Env", process.env)
+  const port = process.env.PORT || "4000";  
   app.listen(port);
   
   console.log(`🚀 Server ready at http://localhost:4000/graphql`);
