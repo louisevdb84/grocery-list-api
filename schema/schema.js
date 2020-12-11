@@ -151,6 +151,21 @@ const Mutation = new GraphQLObjectType({
                return Item.findByIdAndUpdate(args._id, {ordered: args.ordered});
             }
         },
+        editItem:{
+            type:ItemType,
+            args:{
+                _id: { type: new GraphQLNonNull(GraphQLString)},               
+                name: { type: new GraphQLNonNull(GraphQLString)},                
+                shopID: { type: GraphQLList(GraphQLString)},   
+            },
+            resolve(parent,args){                   
+               return Item.findByIdAndUpdate(args._id, {
+                   name: args.name,
+                   shopID: args.shopID
+                });
+            }
+        },
+
 
         deleteItem:{
             type:ItemType,
