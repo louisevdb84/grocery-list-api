@@ -131,11 +131,12 @@ const Mutation = new GraphQLObjectType({
         updateCompletedItem:{
             type:ItemType,
             args:{
-                _id: { type: new GraphQLNonNull(GraphQLString)},               
+                _id: { type: new GraphQLNonNull(GraphQLString)},  
+                completed: {type: new GraphQLNonNull(GraphQLBoolean)},         
                 
             },
-            resolve(parent,args){                
-               return Item.findByIdAndUpdate(args._id, {completed: true});
+            resolve(parent,args){                              
+               return Item.findByIdAndUpdate(args._id, {completed: args.completed});
             }
         },
 
@@ -143,10 +144,11 @@ const Mutation = new GraphQLObjectType({
             type:ItemType,
             args:{
                 _id: { type: new GraphQLNonNull(GraphQLString)},               
+                ordered: {type: new GraphQLNonNull(GraphQLBoolean)},         
                 
             },
-            resolve(parent,args){                
-               return Item.findByIdAndUpdate(args._id, {ordered: true});
+            resolve(parent,args){                   
+               return Item.findByIdAndUpdate(args._id, {ordered: args.ordered});
             }
         },
 
